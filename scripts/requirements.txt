@@ -1,0 +1,3 @@
+# Only needed for online geocoding (Nominatim) and future source scrapers.
+# CSV-only runs need nothing beyond the Python standard library.
+requests>=2.31

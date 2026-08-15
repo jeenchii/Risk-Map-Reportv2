@@ -1,0 +1,4 @@
+source,category,severity,title_th,title_en,location_text,lat,lng,reported_at,url,status
+JS100,accident,high,รถชนสะสม รถติดยาว ทางด่วนขาออก,Multi-car crash outbound expressway,ดินแดง,,,,,
+FM91,construction,medium,ปิดเลนซ่อมผิวถนน,Lane closed for resurfacing,พระราม 9,,,,,
+RAMA9,weather,high,ฝนตกหนัก ทัศนวิสัยต่ำ,Heavy rain low visibility,อโศก,,,,,

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>แผนที่ความเสี่ยง กรุงเทพฯ–ภาคตะวันออก / Bangkok–Eastern Risk & Incident Map</title>
+  <meta name="description" content="แผนที่จุดเสี่ยง อุบัติเหตุ ก่อสร้าง น้ำท่วม และสภาพอากาศ กรุงเทพฯ ชลบุรี พัทยา แหลมฉบัง ระยอง และเส้นทางมอเตอร์เวย์/บางนา-ตราด อัปเดตวันละ 2 ครั้ง พร้อมประวัติ 7 วัน" />
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ===== Sidebar ===== -->
+    <aside id="sidebar">
+      <header id="brand">
+        <div class="brand-title">
+          <span class="dot"></span>
+          <div>
+            <h1>แผนที่ความเสี่ยง กรุงเทพฯ–ตะวันออก</h1>
+            <p class="sub">Bangkok → Eastern Seaboard · Risk &amp; Incident Map</p>
+          </div>
+        </div>
+        <div id="updated" class="updated" title="เวลาอัปเดตล่าสุด">กำลังโหลด…</div>
+      </header>
+
+      <!-- Time range -->
+      <section class="panel">
+        <h2 class="panel-h">ช่วงเวลา · Time</h2>
+        <div class="chips" id="timeChips">
+          <button class="chip active" data-time="active">กำลังเกิด · Active</button>
+          <button class="chip" data-time="24h">24 ชม.</button>
+          <button class="chip" data-time="7d">7 วัน · History</button>
+        </div>
+      </section>
+
+      <!-- Category filters -->
+      <section class="panel">
+        <h2 class="panel-h">ประเภท · Category</h2>
+        <div class="chips" id="catChips"><!-- injected --></div>
+      </section>
+
+      <!-- Source filters -->
+      <section class="panel">
+        <h2 class="panel-h">แหล่งข่าว · Source</h2>
+        <div class="chips" id="srcChips"><!-- injected --></div>
+      </section>
+
+      <!-- Result list -->
+      <section class="panel grow">
+        <h2 class="panel-h">
+          รายการ · Incidents <span id="count" class="count">0</span>
+        </h2>
+        <div id="list" class="list"><!-- injected --></div>
+      </section>
+
+      <footer id="foot">
+        <span>ที่มา · Sources: JS100 · สวพ.91 · ศูนย์วิทยุพระราม 9</span>
+        <span class="muted">ครอบคลุม กทม.–ชลบุรี–ระยอง · อัปเดตวันละ 2 ครั้ง · ประวัติ 7 วัน</span>
+      </footer>
+    </aside>
+
+    <!-- ===== Map ===== -->
+    <main id="mapwrap">
+      <button id="menuToggle" aria-label="เมนู">☰</button>
+      <div id="map"></div>
+      <div id="legend" class="legend"><!-- injected --></div>
+    </main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
