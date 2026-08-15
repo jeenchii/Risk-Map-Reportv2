@@ -1,0 +1,51 @@
+name: Update incidents (twice daily)
+
+# Runs at 06:00 and 18:00 Asia/Bangkok (UTC+7) => 23:00 and 11:00 UTC.
+on:
+  schedule:
+    - cron: "0 11,23 * * *"
+  workflow_dispatch: {}   # allow manual "Run workflow" from the Actions tab
+
+permissions:
+  contents: write         # required to commit the refreshed data back
+
+concurrency:
+  group: update-incidents
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Refresh incidents.json
+        env:
+          ACTIVE_WINDOW_HOURS: "8"
+          HISTORY_DAYS: "7"
+          ENABLE_SCRAPERS: "0"     # flip to "1" once a source scraper is wired up
+          ENABLE_NOMINATIM: "1"
+          # X_BEARER: ${{ secrets.X_BEARER }}   # example secret for a future JS100/X scraper
+        run: python scripts/fetch_incidents.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "risk-map-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/incidents.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: refresh incidents $(date -u +'%Y-%m-%dT%H:%MZ')"
+            git push
+          fi
+
